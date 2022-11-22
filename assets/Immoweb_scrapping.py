@@ -8,7 +8,7 @@ import requests
 import json
 import csv
 
-with open('/Users/ahmetsamilcicek/Desktop/becode/pipeline-immoweb-airflow/assets/used_urls.csv', 'r') as f:
+with open('used_urls.csv', 'r') as f:
     reader = csv.reader(f)
     used_urls = set([item for sublist in reader for item in sublist])
 
@@ -134,7 +134,7 @@ def create_csv_file():
                    "Surface", "Kitchen_type", "Furnished", "Open_fire", "Terrace_surface", "Garden_surface", "Land_surface", "Number_of_facades",
                    "Swimming_pool", "Indoor_parking", "Outdoor_parking"]
 
-    csv_file = "/Users/ahmetsamilcicek/Desktop/becode/pipeline-immoweb-airflow/assets/all_entriess.csv"
+    csv_file = "all_entriess.csv"
     with open(csv_file, 'w') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
         writer.writeheader()
@@ -159,7 +159,7 @@ if __name__ == '__main__':
         properties = list(executor.map(get_info, new_urls))
     session.close()
     create_csv_file()
-    with open('/Users/ahmetsamilcicek/Desktop/becode/pipeline-immoweb-airflow/assets/used_urls.csv', 'a+', newline='') as file_url:
+    with open('used_urls.csv', 'a+', newline='') as file_url:
         writer = csv.writer(file_url)
         for item in new_urls:
             writer.writerow(item)

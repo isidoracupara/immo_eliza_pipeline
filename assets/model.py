@@ -12,7 +12,7 @@ import pickle
 import statistics
 
 df = pd.read_csv(
-    '/Users/ahmetsamilcicek/Desktop/becode/pipeline-immoweb-airflow/assets/dataset_for_model.csv')
+    'dataset_for_model.csv')
 
 filtered_atributes = [
     'Price',
@@ -61,7 +61,7 @@ scaler = StandardScaler().fit(X_train)
 X_train = scaler.transform(X_train)
 X_test = scaler.transform(X_test)
 
-with open("/Users/ahmetsamilcicek/Desktop/becode/pipeline-immoweb-airflow/assets/model/immo_scaler.pkl", "wb") as scalefile:
+with open("model/immo_scaler.pkl", "wb") as scalefile:
     pickle.dump(scaler, scalefile)
 
 # train the model
@@ -72,7 +72,7 @@ X_train_poly = poly_features.fit_transform(X_train)
 poly_model = LinearRegression()
 poly_model.fit(X_train_poly, Y_train)
 
-with open("/Users/ahmetsamilcicek/Desktop/becode/pipeline-immoweb-airflow/assets//model/immo_poly_features.pkl", "wb") as polyfeaturesfile:
+with open("model/immo_poly_features.pkl", "wb") as polyfeaturesfile:
     pickle.dump(poly_features, polyfeaturesfile)
 
 
@@ -88,5 +88,5 @@ r2_train = r2_score(Y_train, y_train_predicted)
 rmse_test = np.sqrt(mean_squared_error(Y_test, y_test_predict))
 r2_test = r2_score(Y_test, y_test_predict)
 
-with open("/Users/ahmetsamilcicek/Desktop/becode/pipeline-immoweb-airflow/assets//model/immo_model.pkl", "wb") as modelfile:
+with open("model/immo_model.pkl", "wb") as modelfile:
     pickle.dump(poly_model, modelfile)

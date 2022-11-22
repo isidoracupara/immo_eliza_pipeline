@@ -12,9 +12,9 @@ import pickle
 import statistics
 
 main_df = pd.read_csv(
-    '/Users/ahmetsamilcicek/Desktop/becode/pipeline-immoweb-airflow/assets/Property_structured_data .csv')
+    'Property_structured_data .csv')
 new_df = pd.read_csv(
-    '/Users/ahmetsamilcicek/Desktop/becode/pipeline-immoweb-airflow/assets/cleaned_entriess.csv')
+    'cleaned_entriess.csv')
 
 main_df.drop('URL', axis=1, inplace=True)
 main_df.dropna(how='all', inplace=True)
@@ -146,5 +146,5 @@ df['zip_code_ratio'] = df['zip_code_ratio'].map(dic_zip_value)
 df['Indoor_parking'].fillna(0, inplace=True)
 df['Outdoor_parking'].fillna(0, inplace=True)
 
-with open('/Users/ahmetsamilcicek/Desktop/becode/pipeline-immoweb-airflow/assets/dataset_for_model.csv', 'w') as file_model:
+with open('dataset_for_model.csv', 'w') as file_model:
     df.to_csv(file_model, index=False)
