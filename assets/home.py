@@ -11,7 +11,7 @@ st.set_page_config(page_title="References", layout="wide")
 #Content of the page
 
 st.markdown("# Immoweb dashboard")
-st.markdown("## Property cost average by municipality in Euro")
+st.markdown("## Property cost average by municipality in EUR")
 
 # load geojson file as a dict
 with open("map/BELGIUM_-_Municipalities.geojson") as geo_file:
@@ -75,6 +75,7 @@ fig = go.Figure(data=go.Choropleth(
 ))
 
 fig.update_geos(fitbounds="locations",)
-fig.update_layout(height=1000, margin={"r":0,"t":0,"l":0,"b":0})
+fig.update_layout(height=1000,margin={"r":0,"t":0,"l":0,"b":0})
+
 
 st.plotly_chart(fig, use_container_width=True)
