@@ -11,7 +11,7 @@ st.set_page_config(page_title="References", layout="wide")
 #Content of the page
 
 st.markdown("# Immoweb dashboard")
-st.markdown("## Property cost average by municipality (INS code)")
+st.markdown("## Property cost average by municipality in Euro")
 
 # load geojson file as a dict
 with open("map/BELGIUM_-_Municipalities.geojson") as geo_file:
@@ -50,9 +50,12 @@ max_price = 1000000
 #     df[col] = df[col].astype(str)
 
 # # LIMITING PROPERTY PRICE
-# df = df['Price'].astype('Int64')
-# df = df.loc[df['Price'] <= 1000000]
+df.loc[df["Price"]== "Null", "Price"]= 0
+df['Price'] = df['Price'].astype(int)
+df["Postal_code"] = df['Postal_code'].astype(int)
+df = df.loc[df['Price'] <= 1000000]
 
+print(df.dtypes)
 
 df['text'] = df['municipality'] + '<br>' + \
     'Postcode: ' +  df['Postal_code'].astype(str) + '<br>' + \
