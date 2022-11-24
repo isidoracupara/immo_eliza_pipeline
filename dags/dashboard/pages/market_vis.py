@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 df = pd.read_csv(
-    'Property_structured_data .csv'
+    'scraping/Property_structured_data .csv'
 )
 
 df.drop('URL', axis=1, inplace=True)
@@ -88,7 +88,7 @@ st.subheader('Percentage of Properties Build After 2000s in Belgium')
 
 # df2_recent_properties = df2[df2['construction_year'] > 2000]
 # recent_property_per_region = df2_recent_properties.groupby(
-#     'region', as_index=False)['Locality'].count()
+#     'Region', as_index=False)['Locality'].count()
 # recent_property_per_region.rename(columns={'Locality': 'Number_Of_Property'},
 #                                   inplace=True)
 # recent_property_per_region[

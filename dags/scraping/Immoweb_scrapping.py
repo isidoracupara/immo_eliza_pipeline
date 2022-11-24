@@ -8,7 +8,7 @@ import requests
 import json
 import csv
 
-with open('used_urls.csv', 'r') as f:
+with open('scraping/used_urls.csv', 'r') as f:
     reader = csv.reader(f)
     used_urls = set([item for sublist in reader for item in sublist])
 

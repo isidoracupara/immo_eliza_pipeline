@@ -12,7 +12,7 @@ import pickle
 import statistics
 
 df = pd.read_csv(
-    'dataset_for_model.csv')
+    'cleaning/dataset_for_model.csv')
 
 filtered_atributes = [
     'Price',

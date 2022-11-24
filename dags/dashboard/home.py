@@ -20,7 +20,7 @@ with open("map/BELGIUM_-_Municipalities.geojson") as geo_file:
 
 df_postal_codes = pd.read_csv("map/postal_code_data.csv",dtype={"municipality": str})
 
-df = pd.read_csv("Property_structured_data .csv", dtype={"Locality": str})
+df = pd.read_csv("scraping/Property_structured_data .csv", dtype={"Locality": str})
 
 
 df = df.merge(df_postal_codes,on='Postal_code')
@@ -33,11 +33,31 @@ df = df.merge(df_postal_codes,on='Postal_code')
 min_price = df['Price'].min()
 max_price = 1000000
 
-## ALTERNATE MAP
+
+
+# fig = px.choropleth(df, geojson=geo_data, locations="CODE_INS",
+#     color="Price",
+#     basemap_visible=False,
+#     hover_data=["Postal_code", "municipality"],
+#     color_continuous_scale="Viridis",
+#     #set this range_color to min and max price
+#     range_color=(min_price, 1000000),
+#     featureidkey="properties.CODE_INS",
+#     labels={'CODE_INS':'INS location code', "Price": "Avg price per municipality"}
+# )
+
+# st.header("Property cost average by municipality (INS code)")
+# fig.update_geos(fitbounds="locations")
+# fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+# fig.show()
+
+
+# # ALTERNATE MAP
 # fig = go.Figure(
-#     go.Choropleth(geojson=geo_data, locations="CODE_INS",
-#         color="Price",
+#     go.Choropleth(geojson=geo_data, locations=df["CODE_INS"],
+#         colorbar="Price",
 #         basemap_visible=False,
+#         hovertext=[df["Postal_code"], df["municipality"]],
 #         color_continuous_scale="Viridis",
 #         #set this range_color to min and max price
 #         range_color=(min_price, 1000000),
@@ -49,7 +69,7 @@ max_price = 1000000
 # for col in df.columns:
 #     df[col] = df[col].astype(str)
 
-# # LIMITING PROPERTY PRICE
+# LIMITING PROPERTY PRICE
 # df = df['Price'].astype('Int64')
 # df = df.loc[df['Price'] <= 1000000]
 
@@ -62,6 +82,7 @@ fig = go.Figure(data=go.Choropleth(
     geojson=geo_data,
     locations=df['CODE_INS'],
     z=df['Price'],
+    zmax= 1000000,
     colorscale='Reds',
     autocolorscale=False,
     text=df['text'], # hover text
@@ -74,4 +95,4 @@ fig = go.Figure(data=go.Choropleth(
 fig.update_geos(fitbounds="locations",)
 fig.update_layout(height=1000, margin={"r":0,"t":0,"l":0,"b":0})
 
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, use_container_width=True,sharing="streamlit", theme=None)

@@ -12,9 +12,9 @@ import pickle
 import statistics
 
 main_df = pd.read_csv(
-    'Property_structured_data .csv')
+    'scraping/Property_structured_data .csv')
 new_df = pd.read_csv(
-    'cleaned_entriess.csv')
+    'cleaning/cleaned_entriess.csv')
 
 main_df.drop('URL', axis=1, inplace=True)
 main_df.dropna(how='all', inplace=True)
